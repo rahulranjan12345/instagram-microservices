@@ -6,4 +6,7 @@ import java.util.List;
 public interface PostService {
     Post create(Post post);
     List<Post> getAll();
+    void deletePost(long postId);
+    Post getPost(long postId);
+
 }
