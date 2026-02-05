@@ -9,4 +9,6 @@ public interface PostService {
     void deletePost(long postId);
     Post getPost(long postId);
 
+
+    List<Post> getPostByrUserId(Long userId);
 }

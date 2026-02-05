@@ -2,13 +2,15 @@ package com.social.instagram.post.service;
 
 import com.social.instagram.post.entity.Post;
 import com.social.instagram.post.repository.PostRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository postRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     public PostServiceImpl(PostRepository repository) {
         this.postRepository = repository;
@@ -30,5 +32,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getPost(long postId) {
         return postRepository.findById(postId).orElse(null);
+    }
+
+    @Override
+    public List<Post> getPostByrUserId(Long userId) {
+        return postRepository.findAllByUserId(userId);
     }
 }
