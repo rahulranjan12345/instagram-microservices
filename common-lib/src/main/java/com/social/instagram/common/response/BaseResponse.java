@@ -15,7 +15,9 @@ public class BaseResponse<T> {
     public static <T> BaseResponse<T> success(T data) {
         return new BaseResponse(true, "SUCCESS", data);
     }
-
+    public static <T> BaseResponse<T> successMessage(String msg, T data) {
+        return new BaseResponse<>(true, msg, data);
+    }
     public static <T> BaseResponse<T> error(String message) {
         return new BaseResponse(false, message, null);
     }
