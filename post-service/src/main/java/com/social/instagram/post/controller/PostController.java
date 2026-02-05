@@ -3,6 +3,7 @@ package com.social.instagram.post.controller;
 import com.social.instagram.common.response.BaseResponse;
 import com.social.instagram.post.entity.Post;
 import com.social.instagram.post.service.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,11 +12,8 @@ import java.util.List;
 @RequestMapping("/posts")
 public class PostController {
 
-    private final PostService service;
-
-    public PostController(PostService service) {
-        this.service = service;
-    }
+    @Autowired
+    private  PostService service;
 
     @PostMapping
     public BaseResponse<Post> create(@RequestBody Post post) {
@@ -25,5 +23,15 @@ public class PostController {
     @GetMapping
     public BaseResponse<List<Post>> getAll() {
         return BaseResponse.success(service.getAll());
+    }
+
+    @PostMapping("delete/postId")
+    public  BaseResponse deletePost(@PathVariable Long postId){
+        service.deletePost(postId);
+        return BaseResponse.success(null);
+    }
+    @GetMapping("/postId")
+    public BaseResponse<Post> getPost(@PathVariable Long postId) {
+        return BaseResponse.success(service.getPost(postId));
     }
 }

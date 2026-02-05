@@ -8,17 +8,27 @@ import java.util.List;
 @Service
 public class PostServiceImpl implements PostService {
 
-    private final PostRepository repository;
+    private final PostRepository postRepository;
 
     public PostServiceImpl(PostRepository repository) {
-        this.repository = repository;
+        this.postRepository = repository;
     }
 
     public Post create(Post post) {
-        return repository.save(post);
+        return postRepository.save(post);
     }
 
     public List<Post> getAll() {
-        return repository.findAll();
+        return postRepository.findAll();
+    }
+
+    @Override
+    public void deletePost(long postId) {
+        postRepository.deleteById(postId);
+    }
+
+    @Override
+    public Post getPost(long postId) {
+        return postRepository.findById(postId).orElse(null);
     }
 }
